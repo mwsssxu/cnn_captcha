@@ -7,7 +7,7 @@ import time
 from PIL import Image
 import random
 import os
-from cnnlib.network import CNN
+from network import CNN
 
 
 class TestError(Exception):

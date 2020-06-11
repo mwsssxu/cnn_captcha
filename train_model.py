@@ -8,7 +8,11 @@ import time
 from PIL import Image
 import random
 import os
-from cnnlib.network import CNN
+from network import CNN
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 
 class TrainError(Exception):
@@ -126,7 +130,7 @@ class TrainModel(CNN):
         # 在训练前校验所有文件格式
         print("开始校验所有图片后缀")
         for index, img_name in enumerate(self.train_images_list):
-            print("{} image pass".format(index), end='\r')
+            print("{} image pass".format(index))
             if not img_name.endswith(self.image_suffix):
                 raise TrainError('confirm images suffix：you request [.{}] file but get file [{}]'
                                  .format(self.image_suffix, img_name))

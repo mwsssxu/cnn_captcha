@@ -1,12 +1,17 @@
+# -*- coding: utf-8 -*-
+
 import tensorflow as tf
 import numpy as np
 import os
 from PIL import Image
 import random
+import sys
 
 
 class CNN(object):
     def __init__(self, image_height, image_width, max_captcha, char_set, model_save_dir):
+        reload(sys)
+        sys.setdefaultencoding('utf8')
         # 初始值
         self.image_height = image_height
         self.image_width = image_width

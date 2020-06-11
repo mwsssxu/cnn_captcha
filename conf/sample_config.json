@@ -11,13 +11,13 @@
   "image_height": 60,
   "max_captcha": 4,
   "image_suffix": "png",
-  "char_set": "0123456789abcdefghijklmnopqrstuvwxyz",
+  "char_set": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ中文测试阿斯顿发送到恶吻发个人房贷不敢惹在内存中保存文件系统中每个文件和每个数据块的引用关系对于超大集群来说内存将成为限制系统横向扩展的瓶颈",
   "use_labels_json_file": false,
   "remote_url": "http://127.0.0.1:6100/captcha/",
-  "cycle_stop": 20000,
+  "cycle_stop": 40000,
   "acc_stop": 0.99,
   "cycle_save": 500,
-  "enable_gpu": 1,
+  "enable_gpu": 0,
   "train_batch_size": 128,
   "test_batch_size": 100
 }

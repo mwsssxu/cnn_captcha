@@ -10,7 +10,7 @@ for i in range(10):
 import tensorflow as tf
 import numpy as np
 from PIL import Image
-from cnnlib.network import CNN
+from network import CNN
 import json
 
 
