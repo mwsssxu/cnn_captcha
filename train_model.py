@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,6 +9,10 @@ from PIL import Image
 import random
 import os
 from network import CNN
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 
 class TrainError(Exception):
@@ -87,7 +92,7 @@ class TrainModel(CNN):
     def get_batch(self, n, size=128):
         batch_x = np.zeros([size, self.image_height * self.image_width])  # 初始化
         batch_y = np.zeros([size, self.max_captcha * self.char_set_len])  # 初始化
-        # 分为多少批
+
         max_batch = int(len(self.train_images_list) / size)
         # print(max_batch)
         if max_batch - 1 < 0:

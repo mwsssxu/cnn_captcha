@@ -7,7 +7,10 @@ import os
 import random
 import time
 import json
+import sys
 
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 def gen_special_img(text, file_path, width, height):
     # 生成img文件

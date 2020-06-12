@@ -1,8 +1,8 @@
 {
   "root_dir": "sample/origin/",
   "image_suffix": "png",
-  "characters": "0123456789abcdefghijklmnopqrstuvwxyz",
-  "count": 60000,
+  "characters": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ中文测试阿斯顿发送到恶吻发个人房贷不敢惹在内存中保存文件系统中每个文件和每个数据块的引用关系对于超大集群来说内存将成为限制系统横向扩展的瓶颈",
+  "count": 50000,
   "char_count": 4,
   "width": 100,
   "height": 60
