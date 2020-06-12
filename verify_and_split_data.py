@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 """
 验证图片尺寸和分离测试集（5%）和训练集（95%）
 初始化的时候使用，有新的图片后，可以把图片放在new目录里面使用。
@@ -53,7 +54,7 @@ def verify(origin_dir, real_width, real_height, image_suffix):
 
         # 图片尺寸有异常
         if real_size == img.size:
-            print("{} pass".format(index), end='\r')
+            print("{} pass".format(index))
         else:
             bad_img.append((index, img_name, "图片尺寸异常为：{}".format(img.size)))
 
