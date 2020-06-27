@@ -34,6 +34,8 @@ class TrainModel(CNN):
 
         # 打乱文件顺序+校验图片格式
         self.train_img_path = train_img_path
+        if not os.path.exists(train_img_path):
+            os.makedirs(train_img_path)
         self.train_images_list = os.listdir(train_img_path)
         # 校验格式
         if verify:
@@ -44,6 +46,8 @@ class TrainModel(CNN):
 
         # 验证集文件
         self.verify_img_path = verify_img_path
+        if not os.path.exists(verify_img_path):
+            os.makedirs(verify_img_path)
         self.verify_images_list = os.listdir(verify_img_path)
 
         # 获得图片宽高和字符长度基本信息

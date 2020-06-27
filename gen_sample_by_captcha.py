@@ -13,8 +13,11 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 
 def gen_special_img(text, file_path, width, height):
+    DATA_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'font')
+    font = [os.path.join(DATA_DIR, 'Songti.ttc')]
+
     # 生成img文件
-    generator = ImageCaptcha(width=width, height=height)  # 指定大小
+    generator = ImageCaptcha(width=width, height=height, fonts=font)  # 指定大小
     img = generator.generate_image(text)  # 生成图片
     img.save(file_path)  # 保存图片
 
