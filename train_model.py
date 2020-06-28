@@ -104,15 +104,15 @@ class TrainModel(CNN):
         if n > max_batch - 1:
             n = n % max_batch
         s = n * size
-        e = (n + 1) * size
+        e = s + size
         this_batch = self.train_images_list[s:e]
         # print("{}:{}".format(s, e))
 
         for i, img_name in enumerate(this_batch):
             label, image_array = self.gen_captcha_text_image(self.train_img_path, img_name)
             image_array = self.convert2gray(image_array)  # 灰度化图片
-            batch_x[i, :] = image_array.flatten() / 255  # flatten 转为一维
-            batch_y[i, :] = self.text2vec(label)  # 生成 oneHot
+            batch_x[i, :] = image_array.flatten() / 255  # 存放图片信息，flatten 转为一维
+            batch_y[i, :] = self.text2vec(label)  # 存放文字信息，生成 oneHot
         return batch_x, batch_y
 
     def get_verify_batch(self, size=100):
@@ -168,6 +168,7 @@ class TrainModel(CNN):
             # 恢复模型
             if os.path.exists(self.model_save_dir):
                 try:
+                    print("model文件夹不为空，将加载模型")
                     saver.restore(sess, self.model_save_dir)
                 # 判断捕获model文件夹中没有模型文件的错误
                 except ValueError:
@@ -189,7 +190,7 @@ class TrainModel(CNN):
                     acc_char = sess.run(accuracy_char_count, feed_dict={self.X: batch_x_test, self.Y: batch_y_test, self.keep_prob: 1.})
                     acc_image = sess.run(accuracy_image_count, feed_dict={self.X: batch_x_test, self.Y: batch_y_test, self.keep_prob: 1.})
                     print("第{}次训练 >>> ".format(step))
-                    print("[训练集] 字符准确率为 {:.5f} 图片准确率为 {:.5f} >>> loss {:.10f}".format(acc_char, acc_image, cost_))
+                    print("[训练集] 字符准确率为 {:.10f} 图片准确率为 {:.10f} >>> loss {:.10f}".format(acc_char, acc_image, cost_))
 
                     # with open("loss_train.csv", "a+") as f:
                     #     f.write("{},{},{},{}\n".format(step, acc_char, acc_image, cost_))
@@ -198,7 +199,7 @@ class TrainModel(CNN):
                     batch_x_verify, batch_y_verify = self.get_verify_batch(size=self.test_batch_size)
                     acc_char = sess.run(accuracy_char_count, feed_dict={self.X: batch_x_verify, self.Y: batch_y_verify, self.keep_prob: 1.})
                     acc_image = sess.run(accuracy_image_count, feed_dict={self.X: batch_x_verify, self.Y: batch_y_verify, self.keep_prob: 1.})
-                    print("[验证集] 字符准确率为 {:.5f} 图片准确率为 {:.5f} >>> loss {:.10f}".format(acc_char, acc_image, cost_))
+                    print("[验证集] 字符准确率为 {:.10f} 图片准确率为 {:.10f} >>> loss {:.10f}".format(acc_char, acc_image, cost_))
 
                     # with open("loss_test.csv", "a+") as f:
                     #     f.write("{}, {},{},{}\n".format(step, acc_char, acc_image, cost_))
