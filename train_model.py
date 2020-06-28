@@ -144,10 +144,10 @@ class TrainModel(CNN):
         y_predict = self.model()
         print(">>> input batch predict shape: {}".format(y_predict.shape))
         print(">>> End model test")
-        # 计算概率 损失
+        # 计算概率 计算交叉熵损失
         with tf.name_scope('cost'):
             cost = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=y_predict, labels=self.Y))
-        # 梯度下降
+        #  梯度下降 通过反向传播算法计算损失函数对每一个参数的梯度，使用梯度下降算法更新每一个参数
         with tf.name_scope('train'):
             optimizer = tf.train.AdamOptimizer(learning_rate=0.0001).minimize(cost)
         # 计算准确率
