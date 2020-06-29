@@ -64,9 +64,19 @@ class CNN(object):
         print(">>> input x: {}".format(x))
 
         # 卷积层1
+        # 定义过滤器的权重变量，参数包括尺寸、深度和当前层节点矩阵的深度，前2个纬度[3,3]代表过滤器的尺寸为3x3，第三个纬度1表示当前层的深度，第四个纬度32表示过滤器的深度
         wc1 = tf.get_variable(name='wc1', shape=[3, 3, 1, 32], dtype=tf.float32,
                               initializer=tf.contrib.layers.xavier_initializer())
+        # 定义过滤器的偏置项变量，下一层深度32，即有32个不同的偏置项
         bc1 = tf.Variable(self.b_alpha * tf.random_normal([32]))
+        ###
+        # conv2d实现卷积层前向传播算法，第一个参数为当前层的节点矩阵(四维矩阵，后面三个纬度对应一个节点矩阵，第一个纬度对应一个输入batch)
+        # 比如在输入层，input[0,:,:,:]表示第一张图片，input[1,:,:,:]表示第二张图片
+        # strides 为各个纬度上的步长(第一维和最后一维一定是1，因为卷积层的步长只对矩阵的长和宽有效)，
+        # padding为填充方式，SAME表示全0填充、VALID表示不填充
+        ###
+        # bias_add给每一个节点加上偏置项
+        # relu完成去线性化
         conv1 = tf.nn.relu(tf.nn.bias_add(tf.nn.conv2d(x, wc1, strides=[1, 1, 1, 1], padding='SAME'), bc1))
         conv1 = tf.nn.max_pool(conv1, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
         conv1 = tf.nn.dropout(conv1, self.keep_prob)
