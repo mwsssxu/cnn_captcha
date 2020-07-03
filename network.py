@@ -78,6 +78,7 @@ class CNN(object):
         # bias_add给每一个节点加上偏置项
         # relu完成去线性化
         conv1 = tf.nn.relu(tf.nn.bias_add(tf.nn.conv2d(x, wc1, strides=[1, 1, 1, 1], padding='SAME'), bc1))
+        # max_pool实现了最大池化层的前向传播过程，参数和conv2d函数类似
         conv1 = tf.nn.max_pool(conv1, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
         conv1 = tf.nn.dropout(conv1, self.keep_prob)
 
