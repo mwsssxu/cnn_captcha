@@ -17,7 +17,7 @@ height = 32
 width = 32
 class_num = 62
 norm_size = 32  # 参数
-batch_size = 32
+batch_size = 8
 epochs = 40
 
 test_path = "../data/test"
