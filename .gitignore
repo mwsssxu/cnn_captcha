@@ -117,3 +117,5 @@ loss_train.csv
 
 logs/
 /font/
+
+best_model.h5
