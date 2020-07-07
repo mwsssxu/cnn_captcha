@@ -73,7 +73,10 @@ model.summary()
 model.compile(loss='categorical_crossentropy',
               optimizer='adadelta',
               metrics=['accuracy'])
-
+'''
+如果验证损失下降， 那么在每个训练轮之后保存模型。
+ModelCheckpoint(filepath='/tmp/weights.hdf5', verbose=1, save_best_only=True)
+'''
 # 保存效果最好的模型
 cbks = [callbacks.ModelCheckpoint("best_model.h5", save_best_only=True)]
 
